@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometri Lanjutan | @absolutelyrobi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax for rendering Mathematical formulas -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        input[type="radio"] {
+            accent-color: #4f46e5;
+            width: 1.2rem;
+            height: 1.2rem;
+            flex-shrink: 0;
+        }
+        .explanation {
+            animation: slideDown 0.3s ease-out forwards;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .math-overflow {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 0.5rem;
+        }
+        .illustration-box {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-shapes text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight">Trigonometri Masterclass</h1>
+            </div>
+            <div class="text-sm font-medium bg-indigo-700 px-4 py-2 rounded-full shadow-inner border border-indigo-500 hidden sm:block">
+                Created by <span class="text-amber-300 font-bold">@absolutelyrobi</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-8 flex flex-col md:flex-row gap-8">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-1/4 flex-shrink-0">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sticky top-24">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 px-2">Daftar Materi (40 Soal)</h2>
+                <nav class="space-y-2">
+                    <button onclick="switchTab('bab1')" id="btn-bab1" class="tab-btn w-full text-left px-4 py-3 rounded-xl transition-all duration-200 font-semibold flex items-center gap-3 bg-indigo-50 text-indigo-600">
+                        <i class="fa-solid fa-crosshairs w-5 text-center"></i> Koordinat Kutub
+                    </button>
+                    <button onclick="switchTab('bab2')" id="btn-bab2" class="tab-btn w-full text-left px-4 py-3 rounded-xl transition-all duration-200 font-semibold flex items-center gap-3 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-rotate w-5 text-center"></i> Relasi Sudut
+                    </button>
+                    <button onclick="switchTab('bab3')" id="btn-bab3" class="tab-btn w-full text-left px-4 py-3 rounded-xl transition-all duration-200 font-semibold flex items-center gap-3 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-mountain w-5 text-center"></i> Elevasi & Depresi
+                    </button>
+                    <button onclick="switchTab('bab4')" id="btn-bab4" class="tab-btn w-full text-left px-4 py-3 rounded-xl transition-all duration-200 font-semibold flex items-center gap-3 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-arrows-spin w-5 text-center"></i> Sudut > 360°
+                    </button>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <section class="w-full md:w-3/4">
+            
+            <!-- ================= BAB 1 ================= -->
+            <div id="bab1" class="tab-content active bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10">
+                <div class="mb-8">
+                    <span class="bg-indigo-100 text-indigo-700 text-sm font-bold px-3 py-1 rounded-full border border-indigo-200">Bab 1</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Koordinat Kutub & Kartesius</h2>
+                    <p class="text-slate-500">Mempelajari cara lain menentukan posisi titik di bidang datar dan penerapannya dalam pemetaan.</p>
+                </div>
+
+                <!-- SVG Ilustrasi Header Bab 1 -->
+                <div class="w-full bg-slate-50 rounded-2xl border-2 border-slate-200 mb-8 p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner hidden sm:flex">
+                    <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Ilustrasi Titik P(x,y) dan P(r, θ)</h4>
+                    <svg width="300" height="250" viewBox="0 0 300 250" class="drop-shadow-md">
+                        <line x1="20" y1="200" x2="280" y2="200" stroke="#cbd5e1" stroke-width="2"/>
+                        <line x1="50" y1="20" x2="50" y2="230" stroke="#cbd5e1" stroke-width="2"/>
+                        <text x="270" y="215" fill="#64748b" font-family="sans-serif" font-weight="bold">X</text>
+                        <text x="30" y="30" fill="#64748b" font-family="sans-serif" font-weight="bold">Y</text>
+                        <text x="35" y="215" fill="#64748b" font-family="sans-serif" font-weight="bold">0</text>
+                        <path d="M50 200 L200 200 L200 50 Z" fill="#e0e7ff" opacity="0.6"/>
+                        <line x1="50" y1="200" x2="200" y2="50" stroke="#4f46e5" stroke-width="3"/>
+                        <line x1="50" y1="200" x2="200" y2="200" stroke="#f59e0b" stroke-width="3" stroke-dasharray="5,5"/>
+                        <line x1="200" y1="200" x2="200" y2="50" stroke="#10b981" stroke-width="3" stroke-dasharray="5,5"/>
+                        <polyline points="185,200 185,185 200,185" fill="none" stroke="#64748b" stroke-width="1.5"/>
+                        <path d="M 90 200 A 40 40 0 0 0 78 172" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <text x="100" y="190" fill="#ef4444" font-family="sans-serif" font-weight="bold">θ</text>
+                        <text x="110" y="115" fill="#4f46e5" font-family="sans-serif" font-weight="bold" font-size="18">r</text>
+                        <text x="120" y="220" fill="#f59e0b" font-family="sans-serif" font-weight="bold" font-size="16">x (Samping)</text>
+                        <text x="210" y="130" fill="#10b981" font-family="sans-serif" font-weight="bold" font-size="16">y (Depan)</text>
+                        <circle cx="200" cy="50" r="6" fill="#4f46e5" stroke="white" stroke-width="2"/>
+                        <text x="160" y="35" fill="#1e293b" font-family="sans-serif" font-weight="bold">P(x, y) / P(r, θ°)</text>
+                    </svg>
+                </div>
+
+                <!-- Latihan Soal Bab 1 -->
+                <div class="mt-8 border-t border-slate-200 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="bg-indigo-500 text-white w-10 h-10 rounded-lg flex items-center justify-center shadow-md"><i class="fa-solid fa-pen-to-square"></i></span> Latihan Soal Bab 1
+                    </h3>
+                    <form id="quiz1" class="space-y-6">
+                        
+                        <!-- Q1 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Kapal Radar -->
+                            <div class="w-full h-36 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 overflow-hidden relative shadow-inner">
+                                <svg width="150" height="100" viewBox="0 0 150 100">
+                                    <circle cx="75" cy="50" r="40" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                                    <circle cx="75" cy="50" r="25" fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.4"/>
+                                    <circle cx="75" cy="50" r="10" fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.4"/>
+                                    <line x1="75" y1="50" x2="105" y2="20" stroke="#4f46e5" stroke-width="2"/>
+                                    <!-- Kapal -->
+                                    <polygon points="100,20 110,20 108,25 102,25" fill="#ef4444"/>
+                                    <rect x="103" y="15" width="4" height="5" fill="#334155"/>
+                                    <text x="115" y="20" fill="#ef4444" font-size="9" font-weight="bold">Target</text>
+                                    <circle cx="75" cy="50" r="3" fill="#334155"/>
+                                </svg>
+                                <span class="absolute top-2 right-3 text-xs font-bold text-slate-400 bg-white px-2 py-1 rounded shadow-sm">Radar Pelabuhan</span>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">1. Sebuah kapal pencari ikan terdeteksi oleh radar pelabuhan berada pada koordinat Kartesius $(5\sqrt{3}, 5)$ km dari pusat radar. Untuk mengarahkan tim SAR, koordinat tersebut harus diubah ke dalam sistem koordinat kutub.<br><br>Posisi kapal tersebut dalam koordinat kutub adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_1_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_1" value="A"> <span class="math-overflow">A. $(10, 60^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_1" value="B"> <span class="math-overflow">B. $(10, 30^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_1" value="C"> <span class="math-overflow">C. $(50, 30^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_1" value="D"> <span class="math-overflow">D. $(-10, 30^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_1" value="E"> <span class="math-overflow">E. $(10, 45^\circ)$</span></label>
+                            </div>
+                            <div id="exp_1_1" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Identifikasi $x = 5\sqrt{3}$ dan $y = 5$ (Keduanya positif $\rightarrow$ Kuadran I).</li>
+                                    <li>Hitung jarak (r): $r = \sqrt{(5\sqrt{3})^2 + 5^2} = \sqrt{75 + 25} = \sqrt{100} = 10$.</li>
+                                    <li>Hitung sudut ($\alpha$): $\tan \alpha = \frac{y}{x} = \frac{5}{5\sqrt{3}} = \frac{1}{\sqrt{3}} = \frac{1}{3}\sqrt{3} \rightarrow \alpha = 30^\circ$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (A) salah karena menukar letak y dan x. (C) lupa mengakarkan $r^2$.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">2. Sebuah drone pemantau lahan pertanian diatur terbang dengan instruksi koordinat kutub $(12, 120^\circ)$ meter dari titik kendali. Agar data ini bisa dimasukkan ke sistem pemetaan digital berbasis grid, sistem perlu mengonversinya.<br><br>Posisi drone dalam koordinat Kartesius adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_2_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_2" value="A"> <span class="math-overflow">A. $(6\sqrt{3}, -6)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_2" value="B"> <span class="math-overflow">B. $(6, 6\sqrt{3})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_2" value="C"> <span class="math-overflow">C. $(-6, 6\sqrt{3})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_2" value="D"> <span class="math-overflow">D. $(-6\sqrt{3}, 6)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_2" value="E"> <span class="math-overflow">E. $(-6, -6\sqrt{3})$</span></label>
+                            </div>
+                            <div id="exp_1_2" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$x = r \cos \alpha = 12 \cos 120^\circ$. Sudut di Kuadran II, cos negatif $\rightarrow 12 \cdot (-\frac{1}{2}) = -6$.</li>
+                                    <li>$y = r \sin \alpha = 12 \sin 120^\circ$. Sudut di Kuadran II, sin positif $\rightarrow 12 \cdot (\frac{1}{2}\sqrt{3}) = 6\sqrt{3}$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (D) tertukar antara nilai cos dan sin untuk sudut referensinya.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">3. Kapal selam riset kelautan mendeteksi anomali suhu pada koordinat $(-8, -8)$ dalam radius pemetaan. Navigator diminta melaporkan posisi anomali ini berdasarkan jarak dan arah kompas dari kapal.<br><br>Jika disajikan dalam koordinat polar, posisi anomali tersebut dinyatakan sebagai...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_3_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_3" value="A"> <span class="math-overflow">A. $(8\sqrt{2}, 45^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_3" value="B"> <span class="math-overflow">B. $(16, 225^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_3" value="C"> <span class="math-overflow">C. $(8\sqrt{2}, 135^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_3" value="D"> <span class="math-overflow">D. $(8\sqrt{2}, 315^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_3" value="E"> <span class="math-overflow">E. $(8\sqrt{2}, 225^\circ)$</span></label>
+                            </div>
+                            <div id="exp_1_3" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$x = -8, y = -8$ (Keduanya negatif $\rightarrow$ Kuadran III).</li>
+                                    <li>$r = \sqrt{(-8)^2 + (-8)^2} = \sqrt{64+64} = \sqrt{128} = 8\sqrt{2}$.</li>
+                                    <li>$\tan \alpha = \frac{-8}{-8} = 1$. Sudut dengan $\tan = 1$ di Kuadran III adalah $180^\circ + 45^\circ = 225^\circ$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: E</p>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">4. Rute penerbangan sebuah pesawat baling-baling dari bandara adalah $(100, 330^\circ)$ km. Menara pengawas membutuhkan data ini dalam komponen Timur-Barat (sumbu X) dan Utara-Selatan (sumbu Y).<br><br>Komponen koordinat Kartesius dari pesawat tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_4_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_4" value="A"> <span class="math-overflow">A. $(-50\sqrt{3}, 50)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_4" value="B"> <span class="math-overflow">B. $(50\sqrt{3}, -50)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_4" value="C"> <span class="math-overflow">C. $(50, -50\sqrt{3})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_4" value="D"> <span class="math-overflow">D. $(100\sqrt{3}, -100)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_4" value="E"> <span class="math-overflow">E. $(-50, 50\sqrt{3})$</span></label>
+                            </div>
+                            <div id="exp_1_4" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$330^\circ$ ada di Kuadran IV (x positif, y negatif).</li>
+                                    <li>$x = 100 \cos 330^\circ = 100 (\frac{1}{2}\sqrt{3}) = 50\sqrt{3}$.</li>
+                                    <li>$y = 100 \sin 330^\circ = 100 (-\frac{1}{2}) = -50$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">5. Sebuah algoritma pergerakan robot diprogram untuk mendeteksi target di kooordinat Kartesius $(p, -p\sqrt{3})$ di mana $p$ adalah konstanta bilangan real positif.<br><br>Bentuk umum koordinat kutub dari target tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_5_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_5" value="A"> <span class="math-overflow">A. $(2p, 120^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_5" value="B"> <span class="math-overflow">B. $(2p^2, 300^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_5" value="C"> <span class="math-overflow">C. $(p\sqrt{2}, 330^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_5" value="D"> <span class="math-overflow">D. $(2p, 300^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_5" value="E"> <span class="math-overflow">E. $(-2p, 60^\circ)$</span></label>
+                            </div>
+                            <div id="exp_1_5" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Posisi $x = p$ (positif) dan $y = -p\sqrt{3}$ (negatif) $\rightarrow$ Kuadran IV.</li>
+                                    <li>$r = \sqrt{p^2 + (-p\sqrt{3})^2} = \sqrt{p^2 + 3p^2} = \sqrt{4p^2} = 2p$.</li>
+                                    <li>$\tan \alpha = \frac{-p\sqrt{3}}{p} = -\sqrt{3}$. Di Kuadran IV, $\alpha = 360^\circ - 60^\circ = 300^\circ$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q6 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Menara -->
+                            <div class="w-full h-36 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative overflow-hidden shadow-inner">
+                                 <svg width="200" height="120" viewBox="0 0 200 120">
+                                     <line x1="100" y1="10" x2="100" y2="110" stroke="#cbd5e1" stroke-width="2"/>
+                                     <line x1="10" y1="90" x2="190" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+                                     <polygon points="45,90 55,90 52,40 48,40" fill="#64748b"/>
+                                     <circle cx="50" cy="35" r="4" fill="#ef4444"/>
+                                     <path d="M 35 25 A 15 15 0 0 1 65 25" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                     <path d="M 25 15 A 25 25 0 0 1 75 15" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                     <line x1="50" y1="35" x2="100" y2="90" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4,4"/>
+                                     <text x="105" y="105" font-size="10" fill="#64748b">(0,0)</text>
+                                     <text x="50" y="105" font-size="10" fill="#4f46e5">(-x, y)</text>
+                                 </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">6. Lokasi sebuah menara seluler dinyatakan dalam koordinat Kartesius $( -5\sqrt{3}, 5 )$. Jika sebuah antena receiver selalu menunjuk ke titik asal $(0,0)$, ia harus diatur pada sudut tertentu.<br><br>Koordinat kutub dari menara tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_6_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_6" value="A"> <span class="math-overflow">A. $(10, 150^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_6" value="B"> <span class="math-overflow">B. $(10, 120^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_6" value="C"> <span class="math-overflow">C. $(50, 150^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_6" value="D"> <span class="math-overflow">D. $(10, 330^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_6" value="E"> <span class="math-overflow">E. $(-10, 30^\circ)$</span></label>
+                            </div>
+                            <div id="exp_1_6" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$x$ negatif, $y$ positif $\rightarrow$ Kuadran II.</li>
+                                    <li>$r = \sqrt{(-5\sqrt{3})^2 + 5^2} = \sqrt{75+25} = 10$.</li>
+                                    <li>$\tan \alpha = \frac{5}{-5\sqrt{3}} = -\frac{1}{3}\sqrt{3}$. Sudut referensi adalah $30^\circ$. Di Kuadran II: $180^\circ - 30^\circ = 150^\circ$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q7 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">7. Dalam latihan militer, regu Alpha melaporkan posisinya berada di koordinat polar $(4\sqrt{2}, 315^\circ)$ km dari markas.<br><br>Letak regu Alpha pada peta Kartesius adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_7_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_7" value="A"> <span class="math-overflow">A. $(-4, 4)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_7" value="B"> <span class="math-overflow">B. $(4, -4)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_7" value="C"> <span class="math-overflow">C. $(4\sqrt{2}, -4\sqrt{2})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_7" value="D"> <span class="math-overflow">D. $(-4\sqrt{2}, 4\sqrt{2})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_7" value="E"> <span class="math-overflow">E. $(4, 4)$</span></label>
+                            </div>
+                            <div id="exp_1_7" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Sudut $315^\circ$ ada di Kuadran IV (x positif, y negatif).</li>
+                                    <li>$x = 4\sqrt{2} \cos 315^\circ = 4\sqrt{2} \cdot (\frac{1}{2}\sqrt{2}) = 4$.</li>
+                                    <li>$y = 4\sqrt{2} \sin 315^\circ = 4\sqrt{2} \cdot (-\frac{1}{2}\sqrt{2}) = -4$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q8 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">8. Pada sebuah layar radar, objek wisata A dan B tercatat. Objek A memiliki koordinat Kartesius $(0, 8)$ dan objek B berada pada koordinat $(8, 0)$.<br><br>Jika diubah ke dalam koordinat kutub, posisi A dan B secara berurutan adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_8_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_8" value="A"> <span class="math-overflow">A. $(8, 90^\circ)$ dan $(8, 0^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_8" value="B"> <span class="math-overflow">B. $(8, 0^\circ)$ dan $(8, 90^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_8" value="C"> <span class="math-overflow">C. $(8, 180^\circ)$ dan $(8, 360^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_8" value="D"> <span class="math-overflow">D. $(64, 90^\circ)$ dan $(64, 0^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_8" value="E"> <span class="math-overflow">E. $(8, 270^\circ)$ dan $(8, 180^\circ)$</span></label>
+                            </div>
+                            <div id="exp_1_8" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Objek A $(0, 8)$: $x=0$, $y=8$. Titik berada murni di sumbu Y positif $\rightarrow$ Sudut $90^\circ$. $r = \sqrt{0^2+8^2} = 8$. Kutub A: $(8, 90^\circ)$.</li>
+                                    <li>Objek B $(8, 0)$: $x=8$, $y=0$. Titik berada murni di sumbu X positif $\rightarrow$ Sudut $0^\circ$. $r = \sqrt{8^2+0^2} = 8$. Kutub B: $(8, 0^\circ)$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (B) terbalik antara A dan B.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q9 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Gua -->
+                            <div class="w-full h-36 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="200" height="120" viewBox="0 0 200 120">
+                                    <line x1="130" y1="20" x2="130" y2="100" stroke="#cbd5e1" stroke-width="1"/>
+                                    <line x1="20" y1="30" x2="180" y2="30" stroke="#cbd5e1" stroke-width="1"/>
+                                    <circle cx="130" cy="30" r="4" fill="#10b981"/>
+                                    <text x="138" y="25" font-size="10" fill="#64748b font-bold">Pintu Gua</text>
+                                    <line x1="130" y1="30" x2="70" y2="30" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4"/>
+                                    <line x1="70" y1="30" x2="70" y2="90" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4"/>
+                                    <circle cx="70" cy="90" r="4" fill="#ef4444"/>
+                                    <text x="80" y="25" font-size="9" fill="#ef4444">B (6m)</text>
+                                    <text x="35" y="65" font-size="9" fill="#ef4444">S (6√3m)</text>
+                                    <line x1="130" y1="30" x2="70" y2="90" stroke="#4f46e5" stroke-width="2"/>
+                                    <path d="M 100 30 A 30 30 0 0 0 110 50" fill="none" stroke="#4f46e5" stroke-width="1.5"/>
+                                    <text x="115" y="45" font-size="10" font-weight="bold" fill="#4f46e5">θ?</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">9. Seorang penjelajah gua berjalan $6$ meter ke arah Barat, lalu berbelok $6\sqrt{3}$ meter ke arah Selatan dari pintu masuk gua.<br><br>Posisi akhir penjelajah tersebut apabila dinyatakan dalam koordinat kutub dengan pintu masuk sebagai titik acuan asal $(0,0)$ adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_9_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_9" value="A"> <span class="math-overflow">A. $(12, 240^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_9" value="B"> <span class="math-overflow">B. $(12, 210^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_9" value="C"> <span class="math-overflow">C. $(6\sqrt{3}, 240^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_9" value="D"> <span class="math-overflow">D. $(12, 120^\circ)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_9" value="E"> <span class="math-overflow">E. $(-12, 60^\circ)$</span></label>
+                            </div>
+                            <div id="exp_1_9" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Barat berarti sumbu X negatif: $x = -6$. Selatan berarti sumbu Y negatif: $y = -6\sqrt{3}$.</li>
+                                    <li>Titik Kartesius: $(-6, -6\sqrt{3})$ $\rightarrow$ Kuadran III.</li>
+                                    <li>$r = \sqrt{(-6)^2 + (-6\sqrt{3})^2} = \sqrt{36 + 108} = \sqrt{144} = 12$.</li>
+                                    <li>$\tan \alpha = \frac{-6\sqrt{3}}{-6} = \sqrt{3} \rightarrow$ Sudut referensi $60^\circ$. Di Kuadran III: $180^\circ + 60^\circ = 240^\circ$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q10 -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">10. Diketahui sebuah titik dalam sistem polar dinyatakan sebagai $(2k, 150^\circ)$. Jika $k$ adalah konstanta positif, maka representasi titik tersebut dalam sistem Kartesius adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q1_10_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_10" value="A"> <span class="math-overflow">A. $(k\sqrt{3}, -k)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_10" value="B"> <span class="math-overflow">B. $(-k\sqrt{3}, k)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_10" value="C"> <span class="math-overflow">C. $(-k, k\sqrt{3})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_10" value="D"> <span class="math-overflow">D. $(k, -k\sqrt{3})$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-indigo-50 transition"><input type="radio" name="q1_10" value="E"> <span class="math-overflow">E. $(-2k\sqrt{3}, 2k)$</span></label>
+                            </div>
+                            <div id="exp_1_10" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-indigo-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$150^\circ$ ada di Kuadran II. cos bernilai negatif, sin bernilai positif.</li>
+                                    <li>$x = 2k \cos 150^\circ = 2k (-\frac{1}{2}\sqrt{3}) = -k\sqrt{3}$.</li>
+                                    <li>$y = 2k \sin 150^\circ = 2k (\frac{1}{2}) = k$.</li>
+                                    <li>Koordinat: $(-k\sqrt{3}, k)$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="flex items-center gap-4 mt-6">
+                            <button type="button" onclick="checkQuiz(1, ['B', 'C', 'E', 'B', 'D', 'A', 'B', 'A', 'A', 'B'])" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg shadow-indigo-200">Periksa Semua Jawaban Bab 1</button>
+                            <div id="res-1" class="text-lg font-bold hidden px-4 py-2 rounded-lg"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ================= BAB 2 ================= -->
+            <div id="bab2" class="tab-content bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10">
+                <div class="mb-8">
+                    <span class="bg-emerald-100 text-emerald-700 text-sm font-bold px-3 py-1 rounded-full border border-emerald-200">Bab 2</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Relasi Sudut Trigonometri</h2>
+                    <p class="text-slate-500">Menyederhanakan sudut besar menggunakan prinsip kuadran (Aturan ASTC).</p>
+                </div>
+
+                <!-- SVG Ilustrasi Bab 2 -->
+                <div class="w-full bg-slate-50 rounded-2xl border-2 border-slate-200 mb-8 p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner hidden sm:flex">
+                    <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Diagram 4 Kuadran (ASTC)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250" class="drop-shadow-md">
+                        <circle cx="125" cy="125" r="100" fill="white" stroke="#94a3b8" stroke-width="2"/>
+                        <path d="M 125 25 A 100 100 0 0 1 225 125 L 125 125 Z" fill="#eff6ff"/>
+                        <path d="M 25 125 A 100 100 0 0 1 125 25 L 125 125 Z" fill="#ecfdf5"/>
+                        <path d="M 125 225 A 100 100 0 0 1 25 125 L 125 125 Z" fill="#fffbeb"/>
+                        <path d="M 225 125 A 100 100 0 0 1 125 225 L 125 125 Z" fill="#fef2f2"/>
+                        <line x1="10" y1="125" x2="240" y2="125" stroke="#475569" stroke-width="3"/>
+                        <line x1="125" y1="10" x2="125" y2="240" stroke="#475569" stroke-width="3"/>
+                        <text x="235" y="115" fill="#475569" font-family="sans-serif" font-weight="bold" font-size="12">0° / 360°</text>
+                        <text x="135" y="15" fill="#475569" font-family="sans-serif" font-weight="bold" font-size="12">90°</text>
+                        <text x="5" y="115" fill="#475569" font-family="sans-serif" font-weight="bold" font-size="12">180°</text>
+                        <text x="135" y="240" fill="#475569" font-family="sans-serif" font-weight="bold" font-size="12">270°</text>
+
+                        <!-- Kuadran I -->
+                        <text x="160" y="70" fill="#1e40af" font-family="sans-serif" font-weight="bold">Kuadran I</text>
+                        <text x="165" y="90" fill="#2563eb" font-family="sans-serif" font-weight="bold" font-size="12">SEMUA +</text>
+                        <!-- Kuadran II -->
+                        <text x="35" y="70" fill="#065f46" font-family="sans-serif" font-weight="bold">Kuadran II</text>
+                        <text x="45" y="90" fill="#059669" font-family="sans-serif" font-weight="bold" font-size="12">Hanya SIN +</text>
+                        <!-- Kuadran III -->
+                        <text x="35" y="175" fill="#b45309" font-family="sans-serif" font-weight="bold">Kuadran III</text>
+                        <text x="40" y="195" fill="#d97706" font-family="sans-serif" font-weight="bold" font-size="12">Hanya TAN +</text>
+                        <!-- Kuadran IV -->
+                        <text x="155" y="175" fill="#991b1b" font-family="sans-serif" font-weight="bold">Kuadran IV</text>
+                        <text x="160" y="195" fill="#dc2626" font-family="sans-serif" font-weight="bold" font-size="12">Hanya COS +</text>
+                    </svg>
+                </div>
+
+                <div class="prose max-w-none text-slate-700 space-y-4">
+                    <h3 class="text-xl font-semibold text-slate-800 border-b pb-2">Aturan Relasi (Shortcut)</h3>
+                    <ul class="list-disc pl-5 space-y-3">
+                        <li class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            <strong>Aturan Sumbu Mendatar ($180^\circ$ dan $360^\circ$) $\rightarrow$ <span class="text-emerald-600">FUNGSI TETAP</span></strong><br>
+                            Bila menggunakan acuan $180^\circ$ atau $360^\circ$, nama fungsinya tidak berubah.<br>
+                            <span class="text-slate-500 italic font-semibold">Contoh: $\cos(180^\circ + \alpha) = -\cos \alpha$</span>
+                        </li>
+                        <li class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                            <strong>Aturan Sumbu Tegak ($90^\circ$ dan $270^\circ$) $\rightarrow$ <span class="text-pink-600">FUNGSI BERUBAH</span></strong><br>
+                            Bila menggunakan acuan $90^\circ$ atau $270^\circ$, fungsinya berubah menyilang: $\sin \leftrightarrow \cos$ | $\tan \leftrightarrow \cot$ | $\sec \leftrightarrow \csc$<br>
+                            <span class="text-slate-500 italic font-semibold">Contoh: $\sin(270^\circ - \alpha) = -\cos \alpha$</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Latihan Soal Bab 2 -->
+                <div class="mt-12 border-t border-slate-200 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="bg-emerald-500 text-white w-10 h-10 rounded-lg flex items-center justify-center shadow-md"><i class="fa-solid fa-pen-to-square"></i></span> Latihan Soal Bab 2
+                    </h3>
+                    <form id="quiz2" class="space-y-6">
+                        
+                        <!-- Q11 (Bab 2 Q1) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">1. Dalam memformulasikan gaya tegangan tali pada sistem katrol miring, seorang teknisi menemukan persamaan yang memuat nilai: $\cos(300^\circ) - \sin(210^\circ)$.<br><br>Hasil dari perhitungan persamaan trigonometri teknisi tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_1_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_1" value="A"> <span class="math-overflow">A. $0$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_1" value="B"> <span class="math-overflow">B. $\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_1" value="C"> <span class="math-overflow">C. $1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_1" value="D"> <span class="math-overflow">D. $-\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_1" value="E"> <span class="math-overflow">E. $-1$</span></label>
+                            </div>
+                            <div id="exp_2_1" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$\cos 300^\circ$ berada di Kuadran IV (cos positif): $\cos(360^\circ - 60^\circ) = \cos 60^\circ = \frac{1}{2}$.</li>
+                                    <li>$\sin 210^\circ$ berada di Kuadran III (sin negatif): $\sin(180^\circ + 30^\circ) = -\sin 30^\circ = -\frac{1}{2}$.</li>
+                                    <li>$\cos 300^\circ - \sin 210^\circ = \frac{1}{2} - (-\frac{1}{2}) = \frac{1}{2} + \frac{1}{2} = 1$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q12 (Bab 2 Q2) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">2. Sebuah analisis spektrum cahaya menghasilkan perbandingan amplitudo gelombang dalam bentuk $\frac{\sin(270^\circ - \alpha)}{\cos(180^\circ - \alpha)}$.<br><br>Bentuk paling sederhana dari perbandingan tersebut ekuivalen dengan...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_2_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_2" value="A"> <span class="math-overflow">A. $\tan \alpha$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_2" value="B"> <span class="math-overflow">B. $\cot \alpha$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_2" value="C"> <span class="math-overflow">C. $1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_2" value="D"> <span class="math-overflow">D. $-1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_2" value="E"> <span class="math-overflow">E. $-\tan \alpha$</span></label>
+                            </div>
+                            <div id="exp_2_2" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Pembilang: $\sin(270^\circ - \alpha)$ mengubah sin menjadi cos, dan berada di Kuadran III (sin negatif). Hasil: $-\cos \alpha$.</li>
+                                    <li>Penyebut: $\cos(180^\circ - \alpha)$ tetap cos, dan berada di Kuadran II (cos negatif). Hasil: $-\cos \alpha$.</li>
+                                    <li>Substitusi: $\frac{-\cos \alpha}{-\cos \alpha} = 1$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (A) salah karena menduga pembilang tetap menjadi $-\sin \alpha$.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q13 (Bab 2 Q3) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">3. Seorang arsitek mendesain atap lengkung di mana beban didistribusikan mengikuti fungsi trigonometri. Untuk menguji daya tahan pada titik tertentu, ia menghitung $\tan(240^\circ) \cdot \cos(330^\circ)$.<br><br>Nilai eksak dari perhitungan arsitek tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_3_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_3" value="A"> <span class="math-overflow">A. $-\frac{3}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_3" value="B"> <span class="math-overflow">B. $-\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_3" value="C"> <span class="math-overflow">C. $\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_3" value="D"> <span class="math-overflow">D. $\frac{3}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_3" value="E"> <span class="math-overflow">E. $1$</span></label>
+                            </div>
+                            <div id="exp_2_3" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$\tan 240^\circ$ (Kuadran III, positif) = $\tan(180^\circ + 60^\circ) = \tan 60^\circ = \sqrt{3}$.</li>
+                                    <li>$\cos 330^\circ$ (Kuadran IV, positif) = $\cos(360^\circ - 30^\circ) = \cos 30^\circ = \frac{1}{2}\sqrt{3}$.</li>
+                                    <li>Hasil kali: $\sqrt{3} \cdot \frac{1}{2}\sqrt{3} = \frac{3}{2}$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q14 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Kincir Angin -->
+                            <div class="w-full h-36 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="150" height="120" viewBox="0 0 150 120">
+                                    <polygon points="65,110 85,110 78,40 72,40" fill="#94a3b8"/>
+                                    <g stroke="#334155" stroke-width="6" stroke-linecap="round">
+                                        <line x1="75" y1="40" x2="75" y2="10" />
+                                        <line x1="75" y1="40" x2="45" y2="60" />
+                                        <line x1="75" y1="40" x2="105" y2="60" />
+                                    </g>
+                                    <circle cx="75" cy="40" r="5" fill="#ef4444"/>
+                                    <path d="M 75 15 A 25 25 0 0 0 50 50" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="3,3"/>
+                                    <line x1="20" y1="110" x2="130" y2="110" stroke="#cbd5e1" stroke-width="3"/>
+                                    <text x="35" y="30" font-size="10" font-weight="bold" fill="#3b82f6">Kuadran II</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">4. Dalam desain baling-baling kincir angin, rasio gradien baling-baling diukur. Diketahui $\tan x = -\frac{4}{3}$ dan arah orientasinya berada pada kuadran II.<br><br>Jika sensor mengukur nilai $\sin x - \cos x$, nilai yang akan muncul di layar adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_4_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_4" value="A"> <span class="math-overflow">A. $\frac{1}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_4" value="B"> <span class="math-overflow">B. $-\frac{1}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_4" value="C"> <span class="math-overflow">C. $\frac{7}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_4" value="D"> <span class="math-overflow">D. $-\frac{7}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_4" value="E"> <span class="math-overflow">E. $1$</span></label>
+                            </div>
+                            <div id="exp_2_4" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Segitiga siku-siku dengan $\tan = \frac{\text{depan}}{\text{samping}} = \frac{4}{3}$, sisi miring $r = \sqrt{4^2+3^2} = 5$.</li>
+                                    <li>Di Kuadran II: $\sin$ bernilai positif, $\cos$ bernilai negatif.</li>
+                                    <li>$\sin x = \frac{4}{5}$, $\cos x = -\frac{3}{5}$.</li>
+                                    <li>$\sin x - \cos x = \frac{4}{5} - (-\frac{3}{5}) = \frac{7}{5}$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (A) terjadi jika siswa menganggap $\cos x$ positif ($\frac{4}{5} - \frac{3}{5}$).</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q15 (Bab 2 Q5) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">5. Sebuah robot berjalan mengikuti vektor yang dipengaruhi oleh fungsi $f(\alpha) = \cos(180^\circ+\alpha) + \sin(270^\circ-\alpha)$.<br><br>Jika disederhanakan, algoritma tersebut sesungguhnya setara dengan pergerakan konstan pada rasio...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_5_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_5" value="A"> <span class="math-overflow">A. $-2\sin \alpha$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_5" value="B"> <span class="math-overflow">B. $0$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_5" value="C"> <span class="math-overflow">C. $2\cos \alpha$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_5" value="D"> <span class="math-overflow">D. $-2\cos \alpha$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_5" value="E"> <span class="math-overflow">E. $\cos \alpha$</span></label>
+                            </div>
+                            <div id="exp_2_5" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$\cos(180^\circ+\alpha)$ (Relasi mendatar, Kuadran III $\rightarrow$ negatif) = $-\cos \alpha$.</li>
+                                    <li>$\sin(270^\circ-\alpha)$ (Relasi tegak, ubah sin jadi cos, Kuadran III $\rightarrow$ negatif) = $-\cos \alpha$.</li>
+                                    <li>Total = $-\cos \alpha - \cos \alpha = -2\cos \alpha$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q16 (Bab 2 Q6) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">6. Evaluator sistem optik menghitung tingkat bias lensa yang direpresentasikan oleh hasil perkalian sudut ekstrem: $\sin 135^\circ \cdot \cos 225^\circ \cdot \tan 315^\circ$.<br><br>Hasil perhitungan tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_6_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_6" value="A"> <span class="math-overflow">A. $1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_6" value="B"> <span class="math-overflow">B. $\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_6" value="C"> <span class="math-overflow">C. $-\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_6" value="D"> <span class="math-overflow">D. $-\frac{1}{2}\sqrt{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_6" value="E"> <span class="math-overflow">E. $\frac{1}{2}\sqrt{2}$</span></label>
+                            </div>
+                            <div id="exp_2_6" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$\sin 135^\circ$ (Kuadran II) = $\sin 45^\circ = \frac{1}{2}\sqrt{2}$.</li>
+                                    <li>$\cos 225^\circ$ (Kuadran III) = $-\cos 45^\circ = -\frac{1}{2}\sqrt{2}$.</li>
+                                    <li>$\tan 315^\circ$ (Kuadran IV) = $-\tan 45^\circ = -1$.</li>
+                                    <li>Perkalian: $(\frac{1}{2}\sqrt{2}) \cdot (-\frac{1}{2}\sqrt{2}) \cdot (-1) = (-\frac{2}{4}) \cdot (-1) = \frac{1}{2}$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q17 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Panel Surya -->
+                            <div class="w-full h-36 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="200" height="120" viewBox="0 0 200 120">
+                                    <!-- Sun -->
+                                    <circle cx="40" cy="30" r="10" fill="#facc15"/>
+                                    <line x1="40" y1="15" x2="40" y2="5" stroke="#facc15" stroke-width="2"/>
+                                    <line x1="40" y1="45" x2="40" y2="55" stroke="#facc15" stroke-width="2"/>
+                                    <line x1="25" y1="30" x2="15" y2="30" stroke="#facc15" stroke-width="2"/>
+                                    <line x1="55" y1="30" x2="65" y2="30" stroke="#facc15" stroke-width="2"/>
+                                    <!-- Panel -->
+                                    <line x1="90" y1="90" x2="160" y2="40" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+                                    <line x1="125" y1="65" x2="125" y2="100" stroke="#64748b" stroke-width="4"/>
+                                    <!-- Ground -->
+                                    <line x1="80" y1="100" x2="180" y2="100" stroke="#cbd5e1" stroke-width="3"/>
+                                    <!-- Angle -->
+                                    <path d="M 155 100 A 30 30 0 0 0 125 65" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                    <text x="145" y="85" font-size="12" font-weight="bold" fill="#ef4444">θ</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">7. Kemiringan panel surya otomatis mengikuti rumus optimalisasi di mana $\cos \theta = -\frac{1}{2}\sqrt{2}$. Mengingat batas putaran mekanis, panel hanya bisa berputar di rentang sudut tumpul.<br><br>Sudut elevasi putaran $\theta$ tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_7_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_7" value="A"> <span class="math-overflow">A. $120^\circ$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_7" value="B"> <span class="math-overflow">B. $135^\circ$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_7" value="C"> <span class="math-overflow">C. $150^\circ$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_7" value="D"> <span class="math-overflow">D. $225^\circ$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_7" value="E"> <span class="math-overflow">E. $315^\circ$</span></label>
+                            </div>
+                            <div id="exp_2_7" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>"Sudut tumpul" berarti rentang $90^\circ &lt; \theta &lt; 180^\circ$ (Kuadran II).</li>
+                                    <li>Nilai $\cos$ di Kuadran II adalah negatif (sesuai soal).</li>
+                                    <li>Nilai sudut referensi untuk $\cos = \frac{1}{2}\sqrt{2}$ adalah $45^\circ$.</li>
+                                    <li>$\theta = 180^\circ - 45^\circ = 135^\circ$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (D) bernilai sama persis tapi di Kuadran III (sudut refleks).</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q18 (Bab 2 Q8) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">8. Sinyal osiloskop memberikan interferensi yang dirumuskan oleh nilai $\sec(300^\circ) + \csc(210^\circ)$.<br><br>Nilai interferensi yang terbaca adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_8_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_8" value="A"> <span class="math-overflow">A. $0$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_8" value="B"> <span class="math-overflow">B. $-4$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_8" value="C"> <span class="math-overflow">C. $4$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_8" value="D"> <span class="math-overflow">D. $\frac{4}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_8" value="E"> <span class="math-overflow">E. $-\frac{4}{3}\sqrt{3}$</span></label>
+                            </div>
+                            <div id="exp_2_8" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>$\sec(300^\circ)$ (Kuadran IV, cos positif sehingga sec juga positif). $\sec 300^\circ = \frac{1}{\cos 300^\circ} = \frac{1}{1/2} = 2$.</li>
+                                    <li>$\csc(210^\circ)$ (Kuadran III, sin negatif sehingga csc juga negatif). $\csc 210^\circ = \frac{1}{\sin 210^\circ} = \frac{1}{-1/2} = -2$.</li>
+                                    <li>Total = $2 + (-2) = 0$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q19 (Bab 2 Q9) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">9. Apabila $\sin \beta = -\frac{5}{13}$ dengan $\beta$ terletak di kuadran III, nilai dari $(\sec \beta \cdot \cot \beta)$ adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_9_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_9" value="A"> <span class="math-overflow">A. $\frac{13}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_9" value="B"> <span class="math-overflow">B. $-\frac{13}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_9" value="C"> <span class="math-overflow">C. $\frac{12}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_9" value="D"> <span class="math-overflow">D. $-\frac{12}{5}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_9" value="E"> <span class="math-overflow">E. $\frac{13}{12}$</span></label>
+                            </div>
+                            <div id="exp_2_9" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Identitas trigonometri yang mudah: $\sec \beta \cdot \cot \beta = \left(\frac{1}{\cos \beta}\right) \cdot \left(\frac{\cos \beta}{\sin \beta}\right) = \frac{1}{\sin \beta} = \csc \beta$.</li>
+                                    <li>$\csc \beta$ adalah kebalikan dari $\sin \beta$.</li>
+                                    <li>$\csc \beta = \frac{1}{-5/13} = -\frac{13}{5}$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (A) melupakan tanda negatif. (C/D) jika diselesaikan manual mencari tangen/kotangen dan salah mencoret.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q20 (Bab 2 Q10) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">10. Pada segitiga ABC yang dibentuk oleh tiga menara pandang di hutan nasional, terdeteksi hubungan koordinat sehingga berlaku perhitungan $\cos(A+B)$.<br><br>Bentuk senilai dari $\cos(A+B)$ yang mengacu pada sudut menara ketiga (C) adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q2_10_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_10" value="A"> <span class="math-overflow">A. $\cos C$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_10" value="B"> <span class="math-overflow">B. $\sin C$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_10" value="C"> <span class="math-overflow">C. $-\sin C$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_10" value="D"> <span class="math-overflow">D. $-\cos C$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-emerald-50 transition"><input type="radio" name="q2_10" value="E"> <span class="math-overflow">E. $\tan C$</span></label>
+                            </div>
+                            <div id="exp_2_10" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-emerald-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Dalam segitiga sembarang, jumlah sudutnya adalah $A + B + C = 180^\circ$.</li>
+                                    <li>Maka, $A + B = 180^\circ - C$.</li>
+                                    <li>$\cos(A+B) = \cos(180^\circ - C)$.</li>
+                                    <li>Menggunakan relasi kuadran II, $\cos(180^\circ - \alpha) = -\cos \alpha$. Jadi, $\cos(180^\circ - C) = -\cos C$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex items-center gap-4 mt-6">
+                            <button type="button" onclick="checkQuiz(2, ['C', 'C', 'D', 'C', 'D', 'B', 'B', 'A', 'B', 'D'])" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg shadow-emerald-200">Periksa Semua Jawaban Bab 2</button>
+                            <div id="res-2" class="text-lg font-bold hidden px-4 py-2 rounded-lg"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ================= BAB 3 ================= -->
+            <div id="bab3" class="tab-content bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10">
+                <div class="mb-8">
+                    <span class="bg-sky-100 text-sky-700 text-sm font-bold px-3 py-1 rounded-full border border-sky-200">Bab 3</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Sudut Elevasi & Depresi</h2>
+                    <p class="text-slate-500">Aplikasi perbandingan trigonometri di kehidupan nyata seperti navigasi dan arsitektur.</p>
+                </div>
+
+                <!-- SVG Ilustrasi Header Bab 3 -->
+                <div class="w-full bg-slate-50 rounded-2xl border-2 border-slate-200 mb-8 p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner hidden sm:flex">
+                    <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Garis Pandang Horizontal & Sudut</h4>
+                    <svg width="400" height="200" viewBox="0 0 400 200" class="drop-shadow-md">
+                        <rect x="50" y="50" width="40" height="130" fill="#94a3b8"/>
+                        <line x1="20" y1="180" x2="380" y2="180" stroke="#0ea5e9" stroke-width="4"/>
+                        <circle cx="70" cy="40" r="5" fill="#334155"/>
+                        <line x1="70" y1="45" x2="70" y2="60" stroke="#334155" stroke-width="2"/>
+                        <line x1="70" y1="40" x2="250" y2="40" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,5"/>
+                        <text x="260" y="45" fill="#64748b" font-family="sans-serif" font-size="12">Garis Horizontal Pengamat</text>
+                        <path d="M 280 170 L 320 170 L 330 180 L 270 180 Z" fill="#f59e0b"/>
+                        <line x1="70" y1="40" x2="300" y2="175" stroke="#ef4444" stroke-width="2"/>
+                        <path d="M 140 40 A 70 70 0 0 1 120 70" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <text x="145" y="65" fill="#ef4444" font-family="sans-serif" font-weight="bold" font-size="12">Sudut Depresi (α)</text>
+                        <line x1="300" y1="175" x2="100" y2="175" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M 250 175 A 50 50 0 0 1 270 155" fill="none" stroke="#10b981" stroke-width="2"/>
+                        <text x="140" y="165" fill="#10b981" font-family="sans-serif" font-weight="bold" font-size="12">Sudut Elevasi = (α)</text>
+                    </svg>
+                </div>
+
+                <div class="prose max-w-none text-slate-700 space-y-4">
+                    <h3 class="text-xl font-semibold text-slate-800 border-b pb-2">Strategi Penyelesaian Soal</h3>
+                    <p>Konsep intinya selalu bermuara pada <strong>segitiga siku-siku imajiner</strong>. Hubungkan Jarak Mendatar (Samping) dan Tinggi (Depan) menggunakan rumus Tangen:</p>
+                    <div class="bg-slate-800 text-white p-4 rounded-lg text-center max-w-sm mx-auto my-4 shadow-md font-mono text-lg tracking-wide border-2 border-slate-700">
+                        $\tan \theta = \frac{\text{Sisi Depan}}{\text{Sisi Samping}}$
+                    </div>
+                </div>
+
+                <!-- Latihan Soal Bab 3 -->
+                <div class="mt-12 border-t border-slate-200 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="bg-sky-500 text-white w-10 h-10 rounded-lg flex items-center justify-center shadow-md"><i class="fa-solid fa-pen-to-square"></i></span> Latihan Soal Bab 3
+                    </h3>
+                    <form id="quiz3" class="space-y-6">
+                        
+                        <!-- Q21 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Sungai & Pohon -->
+                            <div class="w-full h-40 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="250" height="120" viewBox="0 0 250 120">
+                                   <!-- Ground -->
+                                   <line x1="10" y1="100" x2="240" y2="100" stroke="#65a30d" stroke-width="4"/>
+                                   <!-- River -->
+                                   <rect x="140" y="100" width="50" height="20" fill="#3b82f6" opacity="0.6"/>
+                                   <!-- Tree -->
+                                   <rect x="200" y="40" width="10" height="60" fill="#78350f"/>
+                                   <circle cx="205" cy="30" r="20" fill="#16a34a"/>
+                                   <!-- Observers -->
+                                   <circle cx="130" cy="95" r="4" fill="#ef4444"/>
+                                   <circle cx="50" cy="95" r="4" fill="#ef4444"/>
+                                   <!-- Lines of sight -->
+                                   <line x1="130" y1="95" x2="205" y2="30" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3"/>
+                                   <line x1="50" y1="95" x2="205" y2="30" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3"/>
+                                   <!-- Labels -->
+                                   <path d="M 150 95 A 20 20 0 0 0 140 85" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                   <text x="145" y="80" font-size="10" font-weight="bold" fill="#ef4444">60°</text>
+                                   <path d="M 75 95 A 25 25 0 0 0 65 85" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                   <text x="70" y="80" font-size="10" font-weight="bold" fill="#ef4444">30°</text>
+                                   <line x1="50" y1="110" x2="130" y2="110" stroke="#475569" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                   <text x="80" y="118" font-size="10" font-weight="bold" fill="#475569">20m Mundur</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">1. Sebuah tim ahli geologi ingin mengukur lebar sungai yang berbahaya. Di tepi seberang sungai terdapat pohon tinggi vertikal. Ahli geologi menatap puncak pohon dari tepi sungai dengan sudut elevasi $60^\circ$. Ia kemudian mundur sejauh $20$ meter ke belakang dalam satu garis lurus, dan kini melihat puncak pohon dengan sudut elevasi $30^\circ$.<br><br>Lebar sungai (jarak dari pengamat di posisi pertama ke pohon) adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_1_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_1" value="A"> <span class="math-overflow">A. $10$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_1" value="B"> <span class="math-overflow">B. $10\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_1" value="C"> <span class="math-overflow">C. $20$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_1" value="D"> <span class="math-overflow">D. $20\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_1" value="E"> <span class="math-overflow">E. $30$ meter</span></label>
+                            </div>
+                            <div id="exp_3_1" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Misalkan tinggi pohon = $h$, lebar sungai = $x$.</li>
+                                    <li>Dari posisi 1: $\tan 60^\circ = \frac{h}{x} \implies h = x\sqrt{3}$.</li>
+                                    <li>Dari posisi 2: $\tan 30^\circ = \frac{h}{x+20} \implies \frac{1}{\sqrt{3}} = \frac{x\sqrt{3}}{x+20}$.</li>
+                                    <li>Kalikan silang: $x+20 = 3x \implies 2x = 20 \implies x = 10$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (B) adalah tinggi pohon, bukan lebar sungai.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q22 (Bab 3 Q2) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">2. Seorang penjaga pantai berada di menara setinggi $45\sqrt{3}$ meter dari permukaan laut. Ia melihat sebuah perahu pemancing yang mesinnya mogok, dengan sudut depresi $60^\circ$.<br><br>Jarak perahu pemancing tersebut dari pangkal menara adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_2_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_2" value="A"> <span class="math-overflow">A. $15\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_2" value="B"> <span class="math-overflow">B. $45$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_2" value="C"> <span class="math-overflow">C. $45\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_2" value="D"> <span class="math-overflow">D. $135$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_2" value="E"> <span class="math-overflow">E. $90$ meter</span></label>
+                            </div>
+                            <div id="exp_3_2" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Sudut depresi dihitung dari garis horizontal, sehingga sudut antara perahu dan menara (segitiga siku-siku) adalah pelurus/berseberangan dalam, atau elevasi perahu ke menara adalah $60^\circ$.</li>
+                                    <li>$\tan 60^\circ = \frac{\text{Tinggi Menara}}{\text{Jarak}}$.</li>
+                                    <li>$\sqrt{3} = \frac{45\sqrt{3}}{\text{Jarak}} \implies \text{Jarak} = \frac{45\sqrt{3}}{\sqrt{3}} = 45$ meter.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q23 (Bab 3 Q3) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">3. Rani dan Ayu sedang mengukur tinggi gedung pencakar langit dari posisi yang berbeda, tetapi berada dalam satu garis lurus dengan gedung. Rani melihat puncak gedung dengan sudut elevasi $45^\circ$, sedangkan Ayu yang berada di belakang Rani melihat puncak gedung dengan sudut elevasi $30^\circ$. Jika tinggi badan keduanya diabaikan dan jarak mereka berdua $50$ meter.<br><br>Tinggi gedung tersebut dapat dinyatakan sebagai...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_3_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_3" value="A"> <span class="math-overflow">A. $25(\sqrt{3} - 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_3" value="B"> <span class="math-overflow">B. $25(\sqrt{3} + 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_3" value="C"> <span class="math-overflow">C. $50(\sqrt{3} + 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_3" value="D"> <span class="math-overflow">D. $50\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_3" value="E"> <span class="math-overflow">E. $25\sqrt{3}$ meter</span></label>
+                            </div>
+                            <div id="exp_3_3" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Misalkan tinggi gedung $h$, jarak Rani ke gedung $x$. Karena sudut elevasi Rani $45^\circ$, maka $\tan 45^\circ = \frac{h}{x} \implies 1 = \frac{h}{x} \implies h = x$.</li>
+                                    <li>Jarak Ayu ke gedung adalah $x + 50 = h + 50$.</li>
+                                    <li>Sudut Ayu $30^\circ \implies \tan 30^\circ = \frac{h}{h+50} \implies \frac{1}{\sqrt{3}} = \frac{h}{h+50}$.</li>
+                                    <li>$\sqrt{3}h = h + 50 \implies h(\sqrt{3}-1) = 50$.</li>
+                                    <li>Rasionalkan: $h = \frac{50}{\sqrt{3}-1} \cdot \frac{\sqrt{3}+1}{\sqrt{3}+1} = \frac{50(\sqrt{3}+1)}{3-1} = 25(\sqrt{3}+1)$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q24 dengan Ilustrasi Tebing & Kapal (Modifikasi jadi Q4 agar rapi) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Tebing & Kapal -->
+                            <div class="w-full h-40 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                 <svg width="250" height="120" viewBox="0 0 250 120">
+                                    <!-- Cliff -->
+                                    <rect x="20" y="20" width="40" height="80" fill="#94a3b8"/>
+                                    <!-- Sea -->
+                                    <line x1="60" y1="100" x2="240" y2="100" stroke="#0ea5e9" stroke-width="4"/>
+                                    <!-- Ship -->
+                                    <polygon points="180,90 220,90 210,100 190,100" fill="#ef4444"/>
+                                    <rect x="195" y="80" width="10" height="10" fill="#facc15"/>
+                                    <!-- Sight line -->
+                                    <line x1="60" y1="20" x2="190" y2="90" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4"/>
+                                    <!-- Horizontal line -->
+                                    <line x1="60" y1="20" x2="150" y2="20" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                    <!-- Angle -->
+                                    <path d="M 110 20 A 40 40 0 0 1 85 35" fill="none" stroke="#10b981" stroke-width="2"/>
+                                    <text x="120" y="35" font-size="12" font-weight="bold" fill="#10b981">60° Depresi</text>
+                                    <text x="35" y="60" font-size="10" fill="#ef4444" transform="rotate(-90 35 60)">100m</text>
+                                 </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">4. Dari tebing setinggi 100m, terlihat kapal laut dengan sudut depresi $60^\circ$. Jarak kapal ke kaki tebing adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_4_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_4" value="A"> <span class="math-overflow">A. $100\sqrt{3}$m</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_4" value="B"> <span class="math-overflow">B. $\frac{100}{3}\sqrt{3}$m</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_4" value="C"> <span class="math-overflow">C. 50m</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_4" value="D"> <span class="math-overflow">D. 100m</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_4" value="E"> <span class="math-overflow">E. $50\sqrt{3}$m</span></label>
+                            </div>
+                            <div id="exp_3_4" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Depresi $60^\circ$ $\rightarrow$ Elevasi dari kapal ke tebing = $60^\circ$.</li>
+                                    <li>Depan = $100$m. Samping = jarak ($x$).</li>
+                                    <li>$\tan 60^\circ = \frac{100}{x} \implies \sqrt{3} = \frac{100}{x} \implies x = \frac{100}{\sqrt{3}} = \frac{100}{3}\sqrt{3} \text{ m}$</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q25 (Bab 3 Q5) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">5. Andi (tinggi pandangan dari tanah $1,6$ meter) memandangi puncak tiang bendera di lapangan sekolah. Jarak horizontal Andi ke tiang bendera adalah $12$ meter, dan sudut elevasinya adalah $60^\circ$.<br><br>Tinggi tiang bendera tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_5_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_5" value="A"> <span class="math-overflow">A. $(12\sqrt{3} - 1,6)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_5" value="B"> <span class="math-overflow">B. $(12\sqrt{3})$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_5" value="C"> <span class="math-overflow">C. $(1,6 + 4\sqrt{3})$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_5" value="D"> <span class="math-overflow">D. $(1,6 + 12\sqrt{3})$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_5" value="E"> <span class="math-overflow">E. $(13,6\sqrt{3})$ meter</span></label>
+                            </div>
+                            <div id="exp_3_5" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Tinggi sisi tegak segitiga pandangan (di atas kepala): $y = 12 \cdot \tan 60^\circ = 12\sqrt{3}$.</li>
+                                    <li>Tinggi total tiang = tinggi sisi tegak + tinggi Andi = $12\sqrt{3} + 1,6$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (B) lupa menambahkan tinggi badan pengamat.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q26 (Bab 3 Q6) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">6. Tukang cat menggunakan tangga sepanjang $6$ meter yang disandarkan pada dinding. Sudut yang dibentuk antara tangga dan lantai ruangan (sudut elevasi) adalah $60^\circ$. Karena lantai licin, pangkal tangga ditarik mundur sehingga sudutnya mengecil menjadi $45^\circ$.<br><br>Seberapa jauh ketinggian titik sandar tangga pada dinding tersebut merosot/turun?</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_6_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_6" value="A"> <span class="math-overflow">A. $3(\sqrt{3} - \sqrt{2})$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_6" value="B"> <span class="math-overflow">B. $3(\sqrt{2} - 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_6" value="C"> <span class="math-overflow">C. $3(\sqrt{3} - 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_6" value="D"> <span class="math-overflow">D. $3\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_6" value="E"> <span class="math-overflow">E. $3\sqrt{2}$ meter</span></label>
+                            </div>
+                            <div id="exp_3_6" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Tinggi awal ($h_1$): $h_1 = 6 \cdot \sin 60^\circ = 6 \cdot \frac{1}{2}\sqrt{3} = 3\sqrt{3}$ meter.</li>
+                                    <li>Tinggi akhir ($h_2$): $h_2 = 6 \cdot \sin 45^\circ = 6 \cdot \frac{1}{2}\sqrt{2} = 3\sqrt{2}$ meter.</li>
+                                    <li>Penurunan = $h_1 - h_2 = 3\sqrt{3} - 3\sqrt{2} = 3(\sqrt{3} - \sqrt{2})$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q27 (Bab 3 Q7) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">7. CCTV terpasang di atas plafon sebuah ruangan arsip rahasia dengan tinggi $4$ meter dari lantai. Lensa diatur menunduk dengan sudut depresi $30^\circ$ untuk memfokuskan pandangan pada sebuah brankas di lantai.<br><br>Jarak titik tepat di lantai di bawah CCTV menuju brankas adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_7_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_7" value="A"> <span class="math-overflow">A. $2\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_7" value="B"> <span class="math-overflow">B. $4\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_7" value="C"> <span class="math-overflow">C. $8$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_7" value="D"> <span class="math-overflow">D. $8\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_7" value="E"> <span class="math-overflow">E. $4$ meter</span></label>
+                            </div>
+                            <div id="exp_3_7" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Sudut depresi = sudut elevasi benda ke plafon = $30^\circ$.</li>
+                                    <li>$\tan 30^\circ = \frac{\text{Tinggi Plafon}}{\text{Jarak Mendatar}} \implies \frac{1}{\sqrt{3}} = \frac{4}{x}$.</li>
+                                    <li>$x = 4\sqrt{3}$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q28 dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Dua Gedung -->
+                            <div class="w-full h-40 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="280" height="120" viewBox="0 0 280 120">
+                                     <rect x="20" y="20" width="30" height="80" fill="#94a3b8"/>
+                                     <rect x="230" y="20" width="30" height="80" fill="#94a3b8"/>
+                                     <line x1="10" y1="100" x2="270" y2="100" stroke="#cbd5e1" stroke-width="4"/>
+                                     <polygon points="135,100 145,100 140,80" fill="#d97706"/>
+                                     <circle cx="50" cy="20" r="3" fill="#ef4444"/>
+                                     <circle cx="230" cy="20" r="3" fill="#ef4444"/>
+                                     <line x1="50" y1="20" x2="140" y2="80" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="3,3"/>
+                                     <line x1="230" y1="20" x2="140" y2="80" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="3,3"/>
+                                     <line x1="50" y1="20" x2="90" y2="20" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                     <line x1="190" y1="20" x2="230" y2="20" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                     <path d="M 80 20 A 30 30 0 0 1 70 33" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+                                     <path d="M 200 20 A 30 30 0 0 0 210 33" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+                                     <text x="85" y="35" font-size="9" fill="#ef4444" font-weight="bold">45°</text>
+                                     <text x="180" y="35" font-size="9" fill="#ef4444" font-weight="bold">30°</text>
+                                     <text x="130" y="115" font-size="9" fill="#d97706" font-weight="bold">Patung</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">8. Dua orang pengamat, P dan Q, berdiri di dua gedung berseberangan yang memiliki tinggi sama, yaitu $80$ meter. Mereka menatap sebuah patung tepat di tengah jalan di antara kedua gedung tersebut. Pengamat P menatap dengan sudut depresi $45^\circ$, sedangkan Q menatap dengan sudut depresi $30^\circ$.<br><br>Jarak horizontal antara gedung P dan gedung Q adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_8_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_8" value="A"> <span class="math-overflow">A. $80(\sqrt{3} - 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_8" value="B"> <span class="math-overflow">B. $80\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_8" value="C"> <span class="math-overflow">C. $80(\sqrt{3} + 1)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_8" value="D"> <span class="math-overflow">D. $160$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_8" value="E"> <span class="math-overflow">E. $40\sqrt{3}$ meter</span></label>
+                            </div>
+                            <div id="exp_3_8" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Jarak mendatar Patung ke P: $x_1 = \frac{80}{\tan 45^\circ} = 80$ meter.</li>
+                                    <li>Jarak mendatar Patung ke Q: $x_2 = \frac{80}{\tan 30^\circ} = 80\sqrt{3}$ meter.</li>
+                                    <li>Karena patung di antara mereka, jarak total gedung = $x_1 + x_2 = 80 + 80\sqrt{3} = 80(\sqrt{3} + 1)$ meter.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q29 (Bab 3 Q9) dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Layang-Layang -->
+                            <div class="w-full h-40 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="220" height="120" viewBox="0 0 220 120">
+                                    <line x1="20" y1="110" x2="200" y2="110" stroke="#94a3b8" stroke-width="3"/>
+                                    <line x1="40" y1="110" x2="40" y2="80" stroke="#334155" stroke-width="2"/>
+                                    <circle cx="40" cy="75" r="4" fill="#334155"/>
+                                    <line x1="40" y1="85" x2="50" y2="85" stroke="#334155" stroke-width="2"/>
+                                    <line x1="50" y1="85" x2="160" y2="20" stroke="#0ea5e9" stroke-width="1.5"/>
+                                    <polygon points="160,10 170,20 160,40 150,20" fill="#ef4444"/>
+                                    <line x1="50" y1="85" x2="160" y2="85" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                    <line x1="160" y1="85" x2="160" y2="20" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                    <path d="M 80 85 A 30 30 0 0 0 75 70" fill="none" stroke="#10b981" stroke-width="2"/>
+                                    <text x="85" y="75" font-size="10" font-weight="bold" fill="#10b981">60°</text>
+                                    <text x="80" y="45" font-size="10" font-weight="bold" fill="#0ea5e9" transform="rotate(-30 80 45)">150m</text>
+                                    <text x="25" y="100" font-size="9" fill="#334155">1.2m</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">9. Beni bermain layang-layang dengan panjang benang lurus sempurna tanpa kelengkungan sejauh $150$ meter. Sudut elevasi layang-layang akibat hembusan angin stabil adalah $60^\circ$. Jika tangan Beni memegang gulungan benang pada ketinggian $1,2$ meter.<br><br>Ketinggian total layang-layang tersebut dari permukaan tanah adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_9_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_9" value="A"> <span class="math-overflow">A. $(75 + 1,2)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_9" value="B"> <span class="math-overflow">B. $(75\sqrt{2} + 1,2)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_9" value="C"> <span class="math-overflow">C. $(150\sqrt{3} + 1,2)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_9" value="D"> <span class="math-overflow">D. $(75\sqrt{3} + 1,2)$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_9" value="E"> <span class="math-overflow">E. $(150\sqrt{3})$ meter</span></label>
+                            </div>
+                            <div id="exp_3_9" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Sisi miring $r = 150$. Tinggi layang-layang (sisi tegak segitiga): $y = r \cdot \sin 60^\circ$.</li>
+                                    <li>$y = 150 \cdot (\frac{1}{2}\sqrt{3}) = 75\sqrt{3}$ meter.</li>
+                                    <li>Tinggi total = tinggi segitiga + tinggi tangan Beni = $75\sqrt{3} + 1,2$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q30 (Bab 3 Q10) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">10. Sinar matahari membuat bayangan sebuah tugu di alun-alun memanjang sejauh $24$ meter ke arah Barat. Saat itu, matahari berada di ufuk Timur dengan sudut elevasi terhadap puncak tugu sebesar $30^\circ$.<br><br>Tinggi tugu alun-alun tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q3_10_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_10" value="A"> <span class="math-overflow">A. $12$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_10" value="B"> <span class="math-overflow">B. $8\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_10" value="C"> <span class="math-overflow">C. $12\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_10" value="D"> <span class="math-overflow">D. $24\sqrt{3}$ meter</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-sky-50 transition"><input type="radio" name="q3_10" value="E"> <span class="math-overflow">E. $72$ meter</span></label>
+                            </div>
+                            <div id="exp_3_10" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-sky-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Bayangan ($24$ meter) adalah garis mendatar (samping sudut). Tinggi tugu adalah sisi di depan sudut elevasi $30^\circ$.</li>
+                                    <li>Hubungan: $\tan 30^\circ = \frac{\text{Tinggi}}{\text{Bayangan}} \implies \frac{1}{\sqrt{3}} = \frac{\text{Tinggi}}{24}$.</li>
+                                    <li>Tinggi = $\frac{24}{\sqrt{3}} = 8\sqrt{3}$ meter.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex items-center gap-4 mt-6">
+                            <button type="button" onclick="checkQuiz(3, ['A', 'B', 'B', 'B', 'D', 'A', 'B', 'C', 'D', 'B'])" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg shadow-sky-200">Periksa Semua Jawaban Bab 3</button>
+                            <div id="res-3" class="text-lg font-bold hidden px-4 py-2 rounded-lg"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ================= BAB 4 ================= -->
+            <div id="bab4" class="tab-content bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10">
+                <div class="mb-8">
+                    <span class="bg-violet-100 text-violet-700 text-sm font-bold px-3 py-1 rounded-full border border-violet-200">Bab 4</span>
+                    <h2 class="text-3xl font-bold mt-4 mb-2">Sudut Lebih dari 360° & Negatif</h2>
+                    <p class="text-slate-500">Memahami periodisitas dan putaran berulang pada lingkaran trigonometri.</p>
+                </div>
+
+                <!-- SVG Ilustrasi Header Bab 4 -->
+                <div class="w-full bg-slate-50 rounded-2xl border-2 border-slate-200 mb-8 p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner hidden sm:flex">
+                    <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Rotasi Berulang (>360°)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250" class="drop-shadow-md">
+                        <line x1="20" y1="125" x2="230" y2="125" stroke="#cbd5e1" stroke-width="2"/>
+                        <line x1="125" y1="20" x2="125" y2="230" stroke="#cbd5e1" stroke-width="2"/>
+                        <path d="M 125 125 L 175 125 A 50 50 0 1 0 75 125 A 60 60 0 1 0 185 125 A 70 70 0 0 0 160 65" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+                        <polygon points="160,65 168,75 152,70" fill="#8b5cf6"/>
+                        <line x1="125" y1="125" x2="160" y2="65" stroke="#64748b" stroke-width="2" stroke-dasharray="4,4"/>
+                        <text x="175" y="60" fill="#6d28d9" font-family="sans-serif" font-weight="bold">θ + k.360°</text>
+                        <text x="190" y="115" fill="#64748b" font-family="sans-serif">Mulai</text>
+                    </svg>
+                </div>
+
+                <div class="prose max-w-none text-slate-700 space-y-4">
+                    <h3 class="text-xl font-semibold text-slate-800 border-b pb-2">Rumus Reduksi Putaran</h3>
+                    <p>Fungsi trigonometri bekerja layaknya roda. Satu putaran penuh melingkupi $360^\circ$. Jika sudut lebih dari $360^\circ$, posisinya akan kembali mengulang dari awal.</p>
+                    <div class="bg-violet-50 p-5 rounded-xl border border-violet-200 text-center font-semibold text-lg shadow-sm">
+                        $\sin(\alpha \pm k \cdot 360^\circ) = \sin \alpha$<br><br>
+                        $\cos(\alpha \pm k \cdot 360^\circ) = \cos \alpha$<br><br>
+                        $\tan(\alpha \pm k \cdot 360^\circ) = \tan \alpha$
+                    </div>
+                </div>
+
+                <!-- Latihan Soal Bab 4 -->
+                <div class="mt-12 border-t border-slate-200 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="bg-violet-500 text-white w-10 h-10 rounded-lg flex items-center justify-center shadow-md"><i class="fa-solid fa-pen-to-square"></i></span> Latihan Soal Bab 4
+                    </h3>
+                    <form id="quiz4" class="space-y-6">
+                        
+                        <!-- Q31 (Bab 4 Q1) dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Rotor -->
+                            <div class="w-full h-36 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="150" height="120" viewBox="0 0 150 120">
+                                    <circle cx="75" cy="60" r="40" fill="none" stroke="#8b5cf6" stroke-width="4"/>
+                                    <line x1="75" y1="20" x2="75" y2="100" stroke="#8b5cf6" stroke-width="2"/>
+                                    <line x1="35" y1="60" x2="115" y2="60" stroke="#8b5cf6" stroke-width="2"/>
+                                    <circle cx="75" cy="60" r="8" fill="#4c1d95"/>
+                                    <!-- Spiral for 780 degrees (2 full circles + 60 deg) -->
+                                    <path d="M 75 25 A 35 35 0 1 1 40 60 A 40 40 0 1 1 75 15 A 45 45 0 1 1 30 70 A 50 50 0 0 1 60 15" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4"/>
+                                    <polygon points="60,15 65,22 55,22" fill="#f59e0b"/>
+                                    <text x="110" y="30" font-size="12" font-weight="bold" fill="#d97706">780°</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">1. Dalam dinamika putaran rotor generator sinkron, sensor menangkap deviasi fase putaran sejauh $780^\circ$ dari sumbu netral awal.<br><br>Nilai sinus dari deviasi sudut tersebut ($\sin 780^\circ$) adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_1_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_1" value="A"> <span class="math-overflow">A. $-\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_1" value="B"> <span class="math-overflow">B. $-\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_1" value="C"> <span class="math-overflow">C. $\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_1" value="D"> <span class="math-overflow">D. $\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_1" value="E"> <span class="math-overflow">E. $1$</span></label>
+                            </div>
+                            <div id="exp_4_1" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Cari sisa putaran (modulo $360^\circ$): $780^\circ - (2 \times 360^\circ) = 780^\circ - 720^\circ = 60^\circ$.</li>
+                                    <li>Nilai $\sin(60^\circ)$ adalah $\frac{1}{2}\sqrt{3}$ (Positif, Kuadran I).</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q32 (Bab 4 Q2) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">2. Rotasi gear mekanis menghasilkan defleksi mundur yang didefinisikan secara matematis sebagai sudut negatif $-120^\circ$.<br><br>Nilai fungsi $\cos(-120^\circ)$ adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_2_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_2" value="A"> <span class="math-overflow">A. $\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_2" value="B"> <span class="math-overflow">B. $-\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_2" value="C"> <span class="math-overflow">C. $\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_2" value="D"> <span class="math-overflow">D. $-\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_2" value="E"> <span class="math-overflow">E. $-1$</span></label>
+                            </div>
+                            <div id="exp_4_2" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Aturan sudut negatif untuk cosinus: $\cos(-\alpha) = \cos \alpha$.</li>
+                                    <li>$\cos(-120^\circ) = \cos(120^\circ)$.</li>
+                                    <li>Sudut $120^\circ$ berada di Kuadran II, di mana cosinus bernilai negatif. $\cos(180^\circ-60^\circ) = -\cos 60^\circ = -\frac{1}{2}$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (C) terjadi jika mengira $\cos(-\alpha)$ positif tanpa melihat referensi kuadran.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q33 (Bab 4 Q3) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">3. Pada sebuah uji ketahanan komponen pegas, tercatat puntiran torsi sebesar $1125^\circ$. Nilai koefisien distorsi dihitung dengan fungsi tangen dari sudut torsi tersebut.<br><br>Nilai $\tan(1125^\circ)$ adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_3_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_3" value="A"> <span class="math-overflow">A. $\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_3" value="B"> <span class="math-overflow">B. $\frac{1}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_3" value="C"> <span class="math-overflow">C. $1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_3" value="D"> <span class="math-overflow">D. $-1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_3" value="E"> <span class="math-overflow">E. $-\sqrt{3}$</span></label>
+                            </div>
+                            <div id="exp_4_3" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Hilangkan kelipatan $360^\circ$. Nilai $360^\circ \times 3 = 1080^\circ$.</li>
+                                    <li>$1125^\circ - 1080^\circ = 45^\circ$.</li>
+                                    <li>$\tan 45^\circ = 1$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: C</p>
+                            </div>
+                        </div>
+
+                        <!-- Q34 (Bab 4 Q4) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">4. Nilai dari $\csc(-210^\circ)$ untuk digunakan dalam konstanta kalibrasi kompas digital adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_4_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_4" value="A"> <span class="math-overflow">A. $-2$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_4" value="B"> <span class="math-overflow">B. $-\frac{2}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_4" value="C"> <span class="math-overflow">C. $\frac{2}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_4" value="D"> <span class="math-overflow">D. $2$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_4" value="E"> <span class="math-overflow">E. $\frac{1}{2}$</span></label>
+                            </div>
+                            <div id="exp_4_4" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Aturan sudut negatif untuk cosecan: $\csc(-\alpha) = -\csc(\alpha)$.</li>
+                                    <li>$-\csc(210^\circ)$. $210^\circ$ ada di Kuadran III (sin dan csc negatif).</li>
+                                    <li>$-\csc(180^\circ+30^\circ) = -(-\csc 30^\circ) = \csc 30^\circ$.</li>
+                                    <li>$\csc 30^\circ = \frac{1}{\sin 30^\circ} = \frac{1}{1/2} = 2$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (A) salah jika tanda negatif ganda tidak diselesaikan dengan benar.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q35 (Bab 4 Q5) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">5. Mesin sentrifugal diprogram untuk berputar melawan arah jarum jam secara berulang sehingga menghasilkan titik pantau gelombang ke $-1020^\circ$.<br><br>Nilai $\sin(-1020^\circ)$ yang tercatat adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_5_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_5" value="A"> <span class="math-overflow">A. $\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_5" value="B"> <span class="math-overflow">B. $\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_5" value="C"> <span class="math-overflow">C. $-\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_5" value="D"> <span class="math-overflow">D. $-\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_5" value="E"> <span class="math-overflow">E. $1$</span></label>
+                            </div>
+                            <div id="exp_4_5" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Karena negatif, kita bisa menambahkan kelipatan $360^\circ$ terbesar yang mendekatinya agar positif. $360 \times 3 = 1080$.</li>
+                                    <li>$-1020^\circ + 1080^\circ = 60^\circ$.</li>
+                                    <li>$\sin 60^\circ = \frac{1}{2}\sqrt{3}$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: B</p>
+                            </div>
+                        </div>
+
+                        <!-- Q36 (Bab 4 Q6) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">6. Hasil dari kombinasi rumus ekstrem: $\cos(1500^\circ) + \sin(1110^\circ)$ adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_6_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_6" value="A"> <span class="math-overflow">A. $1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_6" value="B"> <span class="math-overflow">B. $\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_6" value="C"> <span class="math-overflow">C. $\frac{1}{2}(\sqrt{3} + 1)$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_6" value="D"> <span class="math-overflow">D. $0$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_6" value="E"> <span class="math-overflow">E. $-1$</span></label>
+                            </div>
+                            <div id="exp_4_6" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Sederhanakan $\cos(1500^\circ)$: $1500^\circ - (4 \times 360^\circ) = 1500^\circ - 1440^\circ = 60^\circ$. $\cos 60^\circ = \frac{1}{2}$.</li>
+                                    <li>Sederhanakan $\sin(1110^\circ)$: $1110^\circ - (3 \times 360^\circ) = 1110^\circ - 1080^\circ = 30^\circ$. $\sin 30^\circ = \frac{1}{2}$.</li>
+                                    <li>Penjumlahan = $\frac{1}{2} + \frac{1}{2} = 1$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q37 (Bab 4 Q7) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">7. Kecepatan sudut sebuah peluru direpresentasikan dengan nilai arah $\tan(-600^\circ)$.<br><br>Bentuk sederhana yang setara dari arah tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_7_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_7" value="A"> <span class="math-overflow">A. $-\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_7" value="B"> <span class="math-overflow">B. $\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_7" value="C"> <span class="math-overflow">C. $-\frac{1}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_7" value="D"> <span class="math-overflow">D. $\frac{1}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_7" value="E"> <span class="math-overflow">E. $0$</span></label>
+                            </div>
+                            <div id="exp_4_7" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Tambahkan putaran penuh positif: $-600^\circ + 720^\circ = 120^\circ$.</li>
+                                    <li>$\tan(120^\circ)$ berada di Kuadran II. Tangen bernilai negatif.</li>
+                                    <li>$\tan(180^\circ - 60^\circ) = -\tan 60^\circ = -\sqrt{3}$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q38 (Bab 4 Q8) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">8. Bentuk rasio dari pecahan aljabar trigonometri $\frac{\sin(810^\circ)}{\cos(-450^\circ)}$ memiliki hasil...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_8_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_8" value="A"> <span class="math-overflow">A. Tidak terdefinisi</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_8" value="B"> <span class="math-overflow">B. $0$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_8" value="C"> <span class="math-overflow">C. $1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_8" value="D"> <span class="math-overflow">D. $-1$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_8" value="E"> <span class="math-overflow">E. $\frac{1}{2}\sqrt{2}$</span></label>
+                            </div>
+                            <div id="exp_4_8" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Pembilang: $\sin(810^\circ) = \sin(810^\circ - 720^\circ) = \sin 90^\circ = 1$.</li>
+                                    <li>Penyebut: $\cos(-450^\circ) = \cos(-450^\circ + 720^\circ) = \cos 270^\circ = 0$.</li>
+                                    <li>$\frac{1}{0}$ adalah bentuk tak terdefinisi (tak hingga).</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Q39 (Bab 4 Q9) -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="font-semibold mb-3 text-slate-800">9. Evaluasi matematis dari amplitudo $\sec(1140^\circ)$ menunjukkan batas maksimum frekuensi perangkat.<br><br>Nilai tersebut adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_9_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_9" value="A"> <span class="math-overflow">A. $\frac{2}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_9" value="B"> <span class="math-overflow">B. $-\frac{2}{3}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_9" value="C"> <span class="math-overflow">C. $-2$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_9" value="D"> <span class="math-overflow">D. $2$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_9" value="E"> <span class="math-overflow">E. $1$</span></label>
+                            </div>
+                            <div id="exp_4_9" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Reduksi sudut: $1140^\circ - (3 \times 360^\circ) = 1140^\circ - 1080^\circ = 60^\circ$.</li>
+                                    <li>$\sec 60^\circ = \frac{1}{\cos 60^\circ} = \frac{1}{1/2} = 2$.</li>
+                                </ol>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: D</p>
+                            </div>
+                        </div>
+
+                        <!-- Q40 (Bab 4 Q10) dengan Ilustrasi -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <!-- Ilustrasi Ekskavator -->
+                            <div class="w-full h-40 bg-slate-50 illustration-box rounded-xl border border-slate-200 flex items-center justify-center mb-5 relative shadow-inner">
+                                <svg width="200" height="120" viewBox="0 0 200 120">
+                                     <line x1="20" y1="100" x2="180" y2="100" stroke="#cbd5e1" stroke-width="4"/>
+                                     <rect x="40" y="70" width="50" height="25" rx="5" fill="#f59e0b"/>
+                                     <circle cx="50" cy="95" r="10" fill="#334155"/>
+                                     <circle cx="80" cy="95" r="10" fill="#334155"/>
+                                     <line x1="65" y1="70" x2="120" y2="30" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+                                     <line x1="120" y1="30" x2="150" y2="60" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"/>
+                                     <path d="M 150 60 Q 170 70 160 85 L 140 70 Z" fill="#64748b"/>
+                                     <path d="M 120 15 A 40 40 0 1 1 30 50" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4"/>
+                                     <polygon points="30,50 38,42 28,40" fill="#ef4444"/>
+                                     <text x="130" y="20" font-size="12" font-weight="bold" fill="#ef4444">8π/3 rad</text>
+                                </svg>
+                            </div>
+
+                            <p class="font-semibold mb-3 text-slate-800">10. Roda gigi pada sebuah ekskavator hidrolik berputar sejauh $\frac{8\pi}{3}$ radian karena hentakan tiba-tiba, yang mengakibatkan kerusakan pada sumbu putar akibat kelebihan beban gaya kosinus.<br><br>Nilai $\cos(\frac{8\pi}{3})$ yang memicu kerusakan adalah...</p>
+                            <div class="grid md:grid-cols-2 gap-2" id="q4_10_opts">
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_10" value="A"> <span class="math-overflow">A. $-\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_10" value="B"> <span class="math-overflow">B. $\frac{1}{2}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_10" value="C"> <span class="math-overflow">C. $-\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_10" value="D"> <span class="math-overflow">D. $\frac{1}{2}\sqrt{3}$</span></label>
+                                <label class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-violet-50 transition"><input type="radio" name="q4_10" value="E"> <span class="math-overflow">E. $-1$</span></label>
+                            </div>
+                            <div id="exp_4_10" class="hidden explanation bg-slate-50 border border-slate-200 mt-4 p-4 rounded-xl text-slate-800 shadow-inner">
+                                <p class="font-bold mb-2 flex items-center text-violet-700"><i class="fa-solid fa-lightbulb mr-2"></i>Pembahasan:</p>
+                                <ol class="list-decimal pl-5 text-sm space-y-1">
+                                    <li>Ubah radian ke derajat: $\frac{8 \times 180^\circ}{3} = 8 \times 60^\circ = 480^\circ$.</li>
+                                    <li>Cari sudut ekivalen: $480^\circ - 360^\circ = 120^\circ$.</li>
+                                    <li>$\cos 120^\circ$ (Kuadran II, cos negatif).</li>
+                                    <li>$\cos 120^\circ = -\cos(180^\circ - 60^\circ) = -\cos 60^\circ = -\frac{1}{2}$.</li>
+                                </ol>
+                                <p class="mt-2 text-xs italic text-slate-500">Pengecoh: (B) jika melupakan aturan tanda pada Kuadran II.</p>
+                                <p class="mt-2 font-bold text-emerald-600">Jawaban: A</p>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex items-center gap-4 mt-6">
+                            <button type="button" onclick="checkQuiz(4, ['C', 'B', 'C', 'D', 'B', 'A', 'A', 'A', 'D', 'A'])" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg shadow-violet-200">Periksa Semua Jawaban Bab 4</button>
+                            <div id="res-4" class="text-lg font-bold hidden px-4 py-2 rounded-lg"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center mt-auto border-t-4 border-indigo-600">
+        <p class="mb-2 text-white font-semibold tracking-wide">Website Interaktif Pembelajaran Trigonometri Lanjutan</p>
+        <p>Hak Cipta &copy; 2026. Design & Code by <a href="#" class="text-amber-400 font-bold hover:text-amber-300">@absolutelyrobi</a></p>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // Tab Navigation Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-indigo-50', 'text-indigo-600');
+                el.classList.add('text-slate-600');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('text-slate-600');
+            activeBtn.classList.add('bg-indigo-50', 'text-indigo-600');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Quiz Verification & Explanation Logic
+        function checkQuiz(babNumber, correctAnswers) {
+            let score = 0;
+            const totalQuestions = correctAnswers.length;
+
+            for (let i = 0; i < totalQuestions; i++) {
+                const questionName = `q${babNumber}_${i + 1}`;
+                const options = document.getElementsByName(questionName);
+                const optsContainer = document.getElementById(`${questionName}_opts`);
+                const explanationBox = document.getElementById(`exp_${babNumber}_${i + 1}`);
+                
+                let answered = false;
+                
+                // Reset styling and hide explanation first
+                optsContainer.querySelectorAll('label').forEach(label => {
+                    label.classList.remove('border-green-500', 'bg-green-50', 'border-red-500', 'bg-red-50');
+                    label.classList.add('border-slate-200');
+                });
+                if (explanationBox) {
+                    explanationBox.classList.add('hidden');
+                }
+
+                // Check Selected Options
+                for (let radio of options) {
+                    if (radio.checked) {
+                        answered = true;
+                        const label = radio.parentElement;
+                        label.classList.remove('border-slate-200');
+                        
+                        if (radio.value === correctAnswers[i]) {
+                            // Benar
+                            score++;
+                            label.classList.add('border-green-500', 'bg-green-50');
+                        } else {
+                            // Salah -> Tunjukkan Kotak Penjelasan
+                            label.classList.add('border-red-500', 'bg-red-50');
+                            if (explanationBox) {
+                                explanationBox.classList.remove('hidden');
+                            }
+                        }
+                    }
+                }
+
+                // Jika Tidak Dijawab sama sekali, tunjukkan Kotak Penjelasan sebagai panduan
+                if (!answered && explanationBox) {
+                    explanationBox.classList.remove('hidden');
+                }
+
+                // Highlight mana jawaban yang benar bagaimanapun kondisinya
+                for(let r of options) {
+                    if(r.value === correctAnswers[i]){
+                        r.parentElement.classList.remove('border-slate-200');
+                        r.parentElement.classList.add('border-green-500', 'bg-green-50');
+                    }
+                }
+            }
+
+            // Tampilkan Result text
+            const resDiv = document.getElementById('res-' + babNumber);
+            resDiv.classList.remove('hidden', 'text-green-800', 'bg-green-100', 'text-red-800', 'bg-red-100', 'text-amber-800', 'bg-amber-100');
+            
+            if(score === totalQuestions) {
+                resDiv.textContent = `Sempurna! Nilai: ${score}/${totalQuestions} 🎉`;
+                resDiv.classList.add('text-green-800', 'bg-green-100');
+            } else if (score >= totalQuestions / 2) {
+                resDiv.textContent = `Bagus! Namun perhatikan penjelasan di bawah. Nilai: ${score}/${totalQuestions} 👍`;
+                resDiv.classList.add('text-amber-800', 'bg-amber-100');
+            } else {
+                resDiv.textContent = `Yuk pelajari penjelasannya pelan-pelan. Nilai: ${score}/${totalQuestions} 💪`;
+                resDiv.classList.add('text-red-800', 'bg-red-100');
+            }
+        }
+    </script>
+</body>
+</html>
